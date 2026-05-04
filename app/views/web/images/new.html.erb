@@ -1,0 +1,28 @@
+<h1>Upload a New Image</h1>
+<%= form_with model: @image, url: web_user_images_path(@user), local: true, multipart: true do |form| %>
+  <p>
+    <%= form.label :image_path %><br>
+    <%= form.file_field :image_path %>
+  </p>
+  <p>
+    <%= form.label :latitude %><br>
+    <%= form.text_field :latitude %>
+  </p>
+  <p>
+    <%= form.label :longitude %><br>
+    <%= form.text_field :longitude %>
+  </p>
+  <p>
+    <%= form.submit "Upload Image", class: "btn btn-primary" %>
+  </p>
+<% end %>
+
+<%= link_to "All Users", web_users_path, class: "btn btn-secondary" %>
+<%= link_to "Profile", web_user_path(session[:user_id]), class: "btn btn-secondary" %>
+
+
+<% if session[:user_id] %>
+  <%= form_with url: web_logout_path, method: :delete, local: true do %>
+    <%= submit_tag "Logout", class: "btn btn-danger" %>
+  <% end %>
+<% end %>
